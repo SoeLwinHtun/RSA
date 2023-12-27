@@ -1,11 +1,11 @@
-from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 
 #rsa.generate_private_key is used to generate a private key with a given public exponent (65537) and key size (2048 bits).
 #The corresponding public key is obtained from the private key.
 #The keys are then serialized to PEM format, which is a common format for storing RSA keys.
 
-def generate_keypair_cryptography():
+def generate_keypair():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
@@ -54,42 +54,14 @@ def get_text():
     text = input("Enter the text: ")
     return text
 
-def get_user_choice():
-    while True:
-        print("Choose operation:")
-        print("1. Encrypt")
-        print("2. Decrypt")
-        print("-1. Quit")
-        choice = input("Enter 1, 2, or -1: ")
+def main():          
+    private_key, public_key = generate_keypair()
+    plaintext = get_text()
+    ciphertext = encrypt_rsa_cryptography(plaintext, public_key)
 
-        if choice in ['1', '2', '-1']:
-            return int(choice)
-        else:
-            print("Invalid choice. Please enter 1, 2, or -1.")
-            
-def main():
-    public_key, private_key = generate_keypair()
-
-    while True:
-        choice = get_user_choice()
-
-        if choice == 1:  # Encrypt
-            plaintext = get_text()
-            private_key_c, public_key_c = generate_keypair_cryptography()
-            ciphertext_c = encrypt_rsa_cryptography(plaintext_c, public_key_c)
-            print("Encrypted text:", ciphertext_c)
-        elif choice == -1:  # Quit
-            print("Quitting the program.")
-            break
+    print("Encryption completed, the cipher text is :\n", ciphertext)
+    print("The Key pair used here is : \n",public_key,private_key)  
 
 if __name__ == "__main__":
     main()
-
-private_key_c, public_key_c = generate_keypair_cryptography()
-plaintext_c = "Hello, RSA!"
-ciphertext_c = encrypt_rsa_cryptography(plaintext_c, public_key_c)
-decrypted_text_c = decrypt_rsa_cryptography(ciphertext_c, private_key_c)
-
-print("Original Text:", plaintext_c)
-print("Ciphertext:", ciphertext_c)
-print("Decrypted Text:", decrypted_text_c)
+        
