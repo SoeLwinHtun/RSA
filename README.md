@@ -1,4 +1,4 @@
-# Different ways of implementation RSA algorithm
+# Different ways of implementation for RSA algorithm
 
 The RSA algorithm is widely used to enable public-key encryption, resulting in secure data storage and transmission, among other benefits. A detailed explanation of the RSA algorithm can be found on [Wikipedia](https://en.wikipedia.org/wiki/RSA_(cryptosystem)).
 
