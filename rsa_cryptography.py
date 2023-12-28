@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding
 #The corresponding public key is obtained from the private key.
 #The keys are then serialized to PEM format, which is a common format for storing RSA keys.
 
-def generate_keypair():
+def generate_keypair_cryptography():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
@@ -55,7 +55,7 @@ def get_text():
     return text
 
 def main():          
-    private_key, public_key = generate_keypair()
+    private_key, public_key = generate_keypair_cryptography()
     plaintext = get_text()
     ciphertext = encrypt_rsa_cryptography(plaintext, public_key)
 

@@ -93,3 +93,11 @@ python rsa_cryptography.py
 ```
 
 It will ask for the plain text to encrypt and display the key pair used here for you to save it.
+
+Now let's move on to pycryptodome.
+
+```bash
+python rsa_pycryptodome.py
+```
+
+This also has the same function as rsa_cryptography. The generated key pair will be in bytes form. You are absolutely welcome to try to let user enter the key in byte form and commit it to the project. Have fun exploring RSA algorithm!

@@ -10,7 +10,7 @@ import ast
 #The private exponent d is calculated as the modular inverse of e modulo phi.
 #The public key is (n, e) and the private key is (n, d).
 
-def generate_keypair():
+def generate_keypair_sympy():
     p = sympy.randprime(10**3, 10**4)
     q = sympy.randprime(10**3, 10**4)
     n = p * q
@@ -30,12 +30,12 @@ def generate_keypair():
 #For each integer in the encrypted text, it is raised to the power of the private exponent (d) modulo the modulus (n).
 #The result is converted back to a character using chr and joined to form the decrypted text.
 
-def encrypt_rsa(text, public_key):
+def encrypt_rsa_sympy(text, public_key):
     n, e = public_key
     encrypted_text = [pow(ord(char), e, n) for char in text]
     return encrypted_text
 
-def decrypt_rsa(encrypted_text, private_key):
+def decrypt_rsa_sympy(encrypted_text, private_key):
     n, d = private_key
     decrypted_text = ''.join([chr(pow(char, d, n)) for char in encrypted_text])
     return decrypted_text
@@ -58,14 +58,14 @@ def get_user_choice():
             print("Invalid choice. Please enter 1, 2, or -1.")
 
 def main():
-    public_key, private_key = generate_keypair()
+    public_key, private_key = generate_keypair_sympy()
 
     while True:
         choice = get_user_choice()
 
         if choice == 1:  # Encrypt
             plaintext = get_text()
-            encrypted_text = encrypt_rsa(plaintext, public_key)
+            encrypted_text = encrypt_rsa_sympy(plaintext, public_key)
             print("Key pair: ",public_key,private_key)
             print("Encrypted text:", encrypted_text)
         elif choice == 2:  # Decrypt
@@ -80,7 +80,7 @@ def main():
             #convert it to tuple form
 
             private_key_input_tuple = ast.literal_eval(private_key_input)
-            decrypted_text = decrypt_rsa(encrypted_text_list, private_key_input_tuple)
+            decrypted_text = decrypt_rsa_sympy(encrypted_text_list, private_key_input_tuple)
 
             print("Decrypted text:", decrypted_text)
         elif choice == -1:  # Quit
